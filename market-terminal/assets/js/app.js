@@ -380,7 +380,9 @@ function wireChrome() {
     setSocketUI('dead', 'Deriv unreachable — paper mode');
     toast('Deriv unreachable', 'Live feed gave up after several attempts. Use “Retry live feed” above when your network allows it.', 'warn', 7000);
   });
-  api.on('reconnecting', (e) => setSocketUI('dead', `Reconnecting (attempt ${e.detail.attempt})…`));
+  api.on('reconnecting', (e) => setSocketUI('dead', feed.isPaper
+    ? `Reconnecting (attempt ${e.detail.attempt})… · paper mode is active`
+    : `Reconnecting (attempt ${e.detail.attempt})…`));
   api.on('error', (e) => setSocketUI('dead', e.detail.message));
   setSocketUI('live', api.connected ? 'Live feed connected' : 'Connecting…');
 
@@ -532,7 +534,9 @@ function renderDashboard(root) {
         h('button', { class: 'btn plain', style: 'justify-content:center', onclick: () => go('dtrader') }, 'Manual trade (DTrader)'),
         h('button', { class: 'btn plain', style: 'justify-content:center', onclick: () => go('risk') }, 'Size a position'),
         h('div', { class: 'note' }, authed
-          ? 'You are connected. Every trade placed here goes to your Deriv account with your own balance.'
+          ? (feed.isPaper
+            ? 'Paper mode: the simulated feed prices every contract and orders never reach Deriv. Connect Deriv to trade for real.'
+            : 'You are connected. Every trade placed here goes to your Deriv account with your own balance.')
           : 'You are browsing in demo mode. Connect Deriv to trade with real or virtual funds.')))));
 
   /* live chart on the selected symbol */
