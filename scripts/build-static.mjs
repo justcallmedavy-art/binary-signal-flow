@@ -17,7 +17,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const src = resolve(root, 'market-terminal');
 const out = resolve(root, 'public');
 
-const ENTRIES = ['index.html', 'assets', 'README.md'];
+const ENTRIES = ['index.html', 'assets'];
 
 await rm(out, { recursive: true, force: true });
 await mkdir(out, { recursive: true });
