@@ -1,0 +1,16 @@
+{
+  "name": "binary-signal-flow",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Binary Signal Flow — animated landing page plus a Deriv trading workspace (Bot Builder, charts, DTrader, reports, risk calculator). Dependency-free ES modules.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "node market-terminal/server/server.js",
+    "start": "node market-terminal/server/server.js",
+    "build": "node scripts/build-static.mjs"
+  }
+}

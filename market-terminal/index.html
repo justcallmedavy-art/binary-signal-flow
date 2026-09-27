@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Binary Signal Flow — Build powerful automated trading bots without coding</title>
+<meta name="description" content="Build powerful automated trading bots without coding. Import your current bot or create from scratch with our detailed guides, FAQs, and tutorials." />
+<link rel="stylesheet" href="assets/css/landing.css" />
+<link rel="stylesheet" href="assets/css/app.css" />
+<link rel="stylesheet" href="assets/css/builder.css" />
+</head>
+<body class="booting">
+
+<!-- ═══════════════ Icon sprite (no external deps) ═══════════════ -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-dashboard" viewBox="0 0 24 24"><path d="M3 3h8v8H3zM13 3h8v5h-8zM13 10h8v11h-8zM3 13h8v8H3z"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24"><path d="M11 2h2v3h-2zM7 6h10a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm2 4v3h2v-3H9zm4 0v3h2v-3h-2zM5 10H3v5h2zm16 0h-2v5h2z"/></symbol>
+  <symbol id="i-charts" viewBox="0 0 24 24"><path d="M3 19h18v2H3zM5 16l4-7 3 3 4-7 3 4v7z"/></symbol>
+  <symbol id="i-robots" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 9.3 8 10 4.6-.7 8-5 8-10V6z"/></symbol>
+  <symbol id="i-bulk" viewBox="0 0 24 24"><path d="M4 4h7v2H4zm0 4h7v2H4zm0 4h7v2H4zm0 4h7v2H4zm9-12h7v6h-7zm0 8h7v6h-7z"/></symbol>
+  <symbol id="i-analysis" viewBox="0 0 24 24"><path d="M4 20h16v2H2V2h2zm3-3V9h3v8zm5 0V4h3v13zm5 0v-6h3v6z"/></symbol>
+  <symbol id="i-report" viewBox="0 0 24 24"><path d="M5 2h9l5 5v15H5zm9 1.5V8h4.5zM7 11h10v2H7zm0 4h10v2H7z"/></symbol>
+  <symbol id="i-risk" viewBox="0 0 24 24"><path d="M12 2 2 20h20zM11 9h2v5h-2zm0 6h2v2h-2z"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><path d="M9 2h9a2 2 0 0 1 2 2v9h-2V4H9zM5 6h9a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm2 5h5V9H7zm0 4h7v-2H7z"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M3 17h3l3-9H6zm9 0h3l3-9h-3zm-2-3h1v5H9z"/><path d="M2 20h20v2H2z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.6 2h4.2v5.6l-2.1 1.2a12 12 0 0 0 6.5 6.5l1.2-2.1H22v4.2c0 1.4-1.2 2.6-2.6 2.6C10.6 20.6 3.4 13.4 3.4 4.6 3.4 3.2 4.4 2 6.6 2z"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M6 3l14 9-14 9z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M11 3h2v9l3.5-3.5 1.4 1.4L12 16.8 6.1 9.9l1.4-1.4L11 12zM4 19h16v2H4z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M12 5c5 0 9 4.5 9 7s-4 7-9 7-9-4.5-9-7 4-7 9-7zm0 3.5A3.5 3.5 0 1 0 12 15.5 3.5 3.5 0 0 0 12 8.5z"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M12 4V1L7 6l5 5V8a5 5 0 1 1-5 5H5a7 7 0 1 0 7-9z"/></symbol>
+  <symbol id="i-undo" viewBox="0 0 24 24"><path d="M10 5V2L4 7l6 5V9a5 5 0 1 1 5 5h-3v2h3a7 7 0 1 0-7-7z"/></symbol>
+  <symbol id="i-redo" viewBox="0 0 24 24"><path d="M14 5V2l6 5-6 5V9a5 5 0 1 0-5 5H6a7 7 0 1 1 7-7z"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M4 4h13l3 3v13H4zm4 0h6v5H8zm-1 9h10v6H7z"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 5h6l2 2h10v12H3z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></symbol>
+  <symbol id="i-zoom-in" viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2zm-1 4h2v3h3v2h-3v3H9v-3H6V9h3z"/></symbol>
+  <symbol id="i-zoom-out" viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2zM6 9h8v2H6z"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M9 3h6l1 2h4v2H4V5h4zM6 8h12l-1 13H7z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><path d="M4 4h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 10h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4zM4 16h4v4H4zm6 0h4v4h-4zm6 0h4v4h-4z"/></symbol>
+  <symbol id="i-ai" viewBox="0 0 24 24"><path d="M12 2l2.2 5.3L20 9l-4.3 3.6L17 19l-5-3-5 3 1.3-6.4L4 9l5.8-1.7z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><path d="M11 1h2v4h-2zM11 19h2v4h-2zM1 11h4v2H1zm18 0h4v2h-4zM4 5.7l1.4-1.4L8.2 7 6.8 8.4zM15.8 17.4l1.4-1.4 2.8 2.8-1.4 1.4zM18.6 5.7 17.2 7.1 15.8 5.7l1.4-1.4zM4 18.2l2.8-2.8L8.2 16.8 5.4 19.6zM12 6a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M3 3h7v2H5v5H3zm11 0h7v7h-2V5h-5zM3 14h2v5h5v2H3zm16 0h2v7h-7v-2h5z"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19 12 13.4 17.6 19 19 17.6 13.4 12 19 6.4 17.6 5 12 10.6z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><path d="M6 10V7a6 6 0 0 1 12 0v3h1v11H5V10zm2 0h8V7a4 4 0 0 0-8 0z"/></symbol>
+  <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 2s1 3 3.5 5.5S19 12 19 14a7 7 0 1 1-14 0c0-3 2-5 3-7 0 0 .5 2 2 2 1 0 1-3 2-7z"/></symbol>
+  <symbol id="i-candle" viewBox="0 0 24 24"><path d="M6 3h2v4h1v10H8v4H6v-4H5V7h1zm10 2h2v3h1v8h-1v5h-2v-5h-1V8h1z"/></symbol>
+</svg>
+
+<!-- ═══════════════════════ PRELOADER ═══════════════════════ -->
+<div id="preloader" aria-hidden="true">
+  <div class="pl-inner">
+    <div class="pl-mark">
+      <span class="pl-bar" style="--d:0"></span><span class="pl-bar" style="--d:1"></span>
+      <span class="pl-bar" style="--d:2"></span><span class="pl-bar" style="--d:3"></span>
+    </div>
+    <h1 class="pl-title">Binary<span>SignalFlow</span></h1>
+    <p class="pl-sub">Initialising market feed&hellip;</p>
+    <div class="pl-track"><div class="pl-fill" id="plFill"></div></div>
+    <p class="pl-status" id="plStatus">Connecting to Deriv</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════ LANDING ═══════════════════════ -->
+<div id="landing" class="scene" hidden>
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div>
+  <div class="grid-veil" aria-hidden="true"></div>
+
+  <header class="lp-nav">
+    <a class="lp-logo" href="#top">
+      <span class="lp-logo-mark"><i></i><i></i><i></i></span>
+      <span>Binary<b>SignalFlow</b></span>
+    </a>
+    <nav class="lp-links">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#blocks">Bot blocks</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="lp-actions">
+      <button class="btn ghost" data-auth="login">Log in</button>
+      <button class="btn primary" data-auth="signup">Sign up with Deriv</button>
+    </div>
+    <button class="lp-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </header>
+
+  <main class="lp-main">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <span class="pill reveal" data-delay="0"><b class="dot"></b> Live Deriv index feed · no code required</span>
+        <h1 class="reveal" data-delay="1">Build powerful <span class="grad">automated trading bots</span> without coding.</h1>
+        <p class="lead reveal" data-delay="2">
+          Import your current bot or create one from scratch with our detailed guides, FAQs and
+          tutorials. Drag blocks, press Run, and watch every tick execute on your Deriv account.
+        </p>
+        <div class="hero-cta reveal" data-delay="3">
+          <button class="btn primary xl" data-auth="signup"><span class="deriv-dot"></span> Sign up with Deriv</button>
+          <button class="btn outline xl" data-auth="login">I already have an account</button>
+        </div>
+        <div class="trust reveal" data-delay="4">
+          <span><svg><use href="#i-lock"/></svg> OAuth 2.0 — we never see your password</span>
+          <span><svg><use href="#i-bot"/></svg> Runs on Deriv's own API</span>
+        </div>
+        <button class="lp-skip reveal" data-delay="5" data-enter>Skip login — explore the whole workspace on a paper account →</button>
+      </div>
+
+      <div class="hero-visual reveal" data-delay="2">
+        <div class="panel-mock">
+          <div class="pm-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>bot_builder — Martingale V2</span></div>
+          <div class="pm-body">
+            <div class="pm-left">
+              <div class="pm-pill active">AI Bot Generator</div>
+              <div class="pm-pill">Blocks menu</div>
+              <div class="pm-row" style="--w:88%"></div>
+              <div class="pm-row" style="--w:64%"></div>
+              <div class="pm-row" style="--w:74%"></div>
+              <div class="pm-row" style="--w:52%"></div>
+            </div>
+            <div class="pm-mid">
+              <div class="pm-block">
+                <div class="pm-head">1. Trade parameters</div>
+                <div class="pm-chips"><span>Market: synthetic</span><span>Volatility 100</span><span>Digits · Over/Under</span></div>
+                <div class="pm-chips"><span>Stake 2.5 USD</span><span>Martingale 1.5</span><span>Stop loss 1000</span></div>
+              </div>
+              <div class="pm-block alt">
+                <div class="pm-head">3. Purchase conditions</div>
+                <div class="pm-chips"><span>Last digit &ge; 5</span></div>
+              </div>
+            </div>
+            <div class="pm-right">
+              <div class="pm-run"><span class="pm-run-btn">▶ Run</span><span class="pm-state">Bot is running</span></div>
+              <div class="pm-tabs"><b>Summary</b><span>Transactions</span><span>Journal</span></div>
+              <div class="pm-kpis">
+                <div><em>Total stake</em><b>80.50</b></div>
+                <div><em>Total payout</em><b>91.81</b></div>
+                <div><em>Profit</em><b class="up">+11.31</b></div>
+              </div>
+              <div class="pm-spark"><span style="--h:30%"></span><span style="--h:48%"></span><span style="--h:22%"></span><span style="--h:64%"></span><span style="--h:44%"></span><span style="--h:80%"></span><span style="--h:56%"></span><span style="--h:92%"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="marquee" aria-hidden="true"><div class="marquee-track" id="marqueeTrack"></div></section>
+
+    <section class="stats">
+      <div class="stat-card reveal"><b class="count" data-count="128" data-suffix="+">0</b><span>Trade blocks</span></div>
+      <div class="stat-card reveal" data-delay="1"><b class="count" data-count="9" data-decimals="2" data-suffix=" ms">0</b><span>Feed latency</span></div>
+      <div class="stat-card reveal" data-delay="2"><b class="count" data-count="247000" data-suffix="+">0</b><span>Bots deployed</span></div>
+      <div class="stat-card reveal" data-delay="3"><b class="count" data-count="99" data-suffix=".9%">0</b><span>Uptime</span></div>
+    </section>
+
+    <section class="features" id="features">
+      <h2 class="sec-title reveal">Everything you need to trade <span class="grad">systematically</span></h2>
+      <p class="sec-sub reveal" data-delay="1">One workspace: build the logic, stress-test it, run it live, and audit every contract afterwards.</p>
+      <div class="feature-grid">
+        <article class="fcard reveal" data-delay="0"><div class="fi"><svg><use href="#i-bot"/></svg></div><h3>Visual Bot Builder</h3><p>Drag blocks for trade parameters, purchase conditions, sell rules and restart logic. No syntax, no compiler.</p></article>
+        <article class="fcard reveal" data-delay="1"><div class="fi"><svg><use href="#i-ai"/></svg></div><h3>AI Bot Generator</h3><p>Describe the strategy in plain English and let the generator assemble a runnable block graph you can edit.</p></article>
+        <article class="fcard reveal" data-delay="2"><div class="fi"><svg><use href="#i-candle"/></svg></div><h3>Live Deriv indices</h3><p>Volatility 10/25/50/75/100, Boom, Crash, Step and Jump indices streaming straight from the Deriv API.</p></article>
+        <article class="fcard reveal" data-delay="3"><div class="fi"><svg><use href="#i-risk"/></svg></div><h3>Risk Calculator</h3><p>Size stakes from your balance, stop-loss and streak depth before a single contract is bought.</p></article>
+        <article class="fcard reveal" data-delay="4"><div class="fi"><svg><use href="#i-report"/></svg></div><h3>Journal &amp; Reports</h3><p>Every run is logged: tick-by-tick journal, transaction table, win/loss splits and exportable reports.</p></article>
+        <article class="fcard reveal" data-delay="5"><div class="fi"><svg><use href="#i-copy"/></svg></div><h3>Copy Trading</h3><p>Mirror a runnable bot between accounts and follow a strategy's live profit series.</p></article>
+      </div>
+    </section>
+
+    <section class="how" id="how">
+      <h2 class="sec-title reveal">From zero to a running bot in three steps</h2>
+      <ol class="steps">
+        <li class="reveal"><b>01</b><h3>Sign up with Deriv</h3><p>Authenticate through Deriv's official OAuth screen. Balance, contracts and history stay on Deriv.</p></li>
+        <li class="reveal" data-delay="1"><b>02</b><h3>Assemble the blocks</h3><p>Pick market, trade type, stake, martingale and stop-loss. Add purchase and sell conditions.</p></li>
+        <li class="reveal" data-delay="2"><b>03</b><h3>Press Run</h3><p>Watch the summary, transactions and journal update live while the bot trades your account.</p></li>
+      </ol>
+    </section>
+
+    <section class="blocks-showcase" id="blocks">
+      <div class="bs-copy reveal">
+        <h2 class="sec-title">A blocks menu that reads like your strategy</h2>
+        <p class="sec-sub">Group by intent instead of by API name — analysis logic, market structure, trade parameters, purchase conditions, sell conditions, restart rules, utility.</p>
+        <ul class="bs-list">
+          <li>Trade parameters · market, contract type, candle interval, virtual hook</li>
+          <li>Purchase conditions · last digit, rise/fall, spreads, streaks</li>
+          <li>Sell conditions · take profit, stop loss, trailing</li>
+          <li>Restart trading conditions · martingale or custom recovery ladder</li>
+        </ul>
+        <button class="btn primary lg" data-auth="signup">Open the builder</button>
+      </div>
+      <div class="bs-menu reveal" data-delay="1">
+        <div class="bsm-item hot">Analysis Logics <span>🔥</span></div>
+        <div class="bsm-item">Market Structure <span>🏗️</span></div>
+        <div class="bsm-item">Trade parameters</div>
+        <div class="bsm-item">Purchase conditions</div>
+        <div class="bsm-item">Sell conditions (optional)</div>
+        <div class="bsm-item">Restart trading conditions</div>
+        <div class="bsm-item">Analysis</div>
+        <div class="bsm-item">Utility</div>
+        <div class="bsm-item">Binary Signal Flow Tools</div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <h2 class="sec-title reveal">FAQ</h2>
+      <div class="faq-list">
+        <details class="reveal"><summary>Is this affiliated with Deriv?</summary><p>No. It is an independent front end built on Deriv's public API and OAuth. Deriv trademarks belong to their owners.</p></details>
+        <details class="reveal"><summary>Do you hold my funds or my password?</summary><p>Never. Login happens on Deriv's own OAuth page and trades are placed from your browser straight to Deriv's WebSocket API.</p></details>
+        <details class="reveal"><summary>Can I test without risking money?</summary><p>Yes — switch to your virtual (demo) account in the account menu before pressing Run. All bot runs work identically on demo.</p></details>
+      </div>
+    </section>
+
+    <section class="final-cta reveal">
+      <h2>Ready to let the machine watch the candles?</h2>
+      <p>Sign in with Deriv, open Bot Builder and press Run.</p>
+      <button class="btn primary xl" data-auth="signup"><span class="deriv-dot"></span> Start trading</button>
+    </section>
+  </main>
+
+  <footer class="lp-footer">
+    <div class="lf-brand"><span class="lp-logo-mark"><i></i><i></i><i></i></span> Binary<b>SignalFlow</b></div>
+    <p>Trading involves risk. Synthetic indices are not suitable for every investor. This is an independent, unofficial front end for the Deriv API.</p>
+  </footer>
+</div>
+
+<!-- ═══════════════════════ APP ═══════════════════════ -->
+<div id="app" class="scene" hidden>
+  <header class="topbar">
+    <div class="tb-left">
+      <button class="tb-icon ghost" id="btnHome"><svg><use href="#i-dashboard"/></svg></button>
+      <h1 id="tbTitle">Reports</h1>
+    </div>
+    <div class="tb-mid"><button class="tb-icon ghost" id="btnSupport" title="Support"><svg><use href="#i-phone"/></svg></button></div>
+    <div class="tb-right">
+      <button class="tb-icon ghost" id="btnRefresh" title="Reconnect"><svg><use href="#i-refresh"/></svg></button>
+      <div class="account" id="accountPill" tabindex="0">
+        <span class="avatar" id="avatarInitial">D</span>
+        <span class="acct">
+          <b id="acctLoginId">DOT94408793</b>
+          <span><span id="acctBalance">9,914.60</span> <em id="acctCurrency">USD</em></span>
+        </span>
+        <svg class="caret"><use href="#i-chevron"/></svg>
+        <div class="account-menu" id="accountMenu"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="welcome-banner">
+    <span>Welcome to Binary Signal Flow — your hub for trading knowledge, Deriv indices, and more</span>
+  </div>
+
+  <nav class="mainnav" id="mainNav"></nav>
+
+  <main id="stage">
+    <section class="view" data-view="dashboard"></section>
+    <section class="view" data-view="bot-builder" hidden></section>
+    <section class="view" data-view="charts" hidden></section>
+    <section class="view" data-view="dtrader" hidden></section>
+    <section class="view" data-view="reports" hidden></section>
+    <section class="view" data-view="risk" hidden></section>
+    <section class="view" data-view="simple" hidden></section>
+  </main>
+
+  <footer class="statusbar">
+    <div class="sb-left">
+      <span class="sb-dot" id="wsDot"></span>
+      <span id="wsLabel">Connecting…</span>
+    </div>
+    <div class="sb-right">
+      <span id="clock">—</span>
+      <button class="sb-btn" id="btnTheme" title="Theme"><svg><use href="#i-sun"/></svg></button>
+      <button class="sb-btn" id="btnLang" title="Language">EN</button>
+      <button class="sb-btn" id="btnFull" title="Fullscreen"><svg><use href="#i-expand"/></svg></button>
+    </div>
+  </footer>
+
+  <div class="floating-badges">
+    <button class="fb ai" id="fabAI" title="AI Bot Generator"><span>AI</span></button>
+    <button class="fb gem" id="fabGemini" title="Strategy assistant"><span>✦</span></button>
+  </div>
+</div>
+
+<!-- ═══════════════════════ MODALS ═══════════════════════ -->
+<div class="modal-host" id="modalHost" hidden></div>
+<div class="toast-host" id="toastHost"></div>
+
+<script type="module" src="assets/js/app.js"></script>
+<script type="module" src="assets/js/landing.js"></script>
+</body>
+</html>

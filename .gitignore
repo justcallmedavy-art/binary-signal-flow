@@ -1,0 +1,24 @@
+# Freebuff tooling state — local only, not part of the app
+.freebuff/
+
+# Local env / secrets (never commit real keys)
+.env
+.env.*
+!.env.example
+**/server/.env
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Vercel
+.vercel
+.vercel-build
+
+# Build output
+public/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log

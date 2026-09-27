@@ -1,0 +1,18 @@
+{
+  "name": "meridian-terminal-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Optional backend for Meridian Terminal: serves the static app and proxies keyed market-data providers so no API secret ever reaches the browser.",
+  "main": "server.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "check": "node --check server.js"
+  },
+  "dependencies": {},
+  "license": "MIT"
+}
